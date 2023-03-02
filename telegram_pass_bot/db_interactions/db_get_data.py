@@ -1,15 +1,11 @@
 from sqlite3 import Cursor
-from types import NoneType
 from typing import Any
 
 
-def get_hash_pass(cur: Cursor, telegram_id: int) -> int | None:
+def get_hash_pass(cur: Cursor, telegram_id: int) -> tuple:
     user = cur.execute("SELECT telegram_id, password_hash FROM users "
                        f"WHERE telegram_id = {telegram_id}; ")
-    try:
-        return tuple(user.fetchone())[1]
-    except IndexError:
-        return None
+    return user.fetchone()
 
 
 def get_all_passwords(cur: Cursor, telegram_id: int) -> list[Any]:

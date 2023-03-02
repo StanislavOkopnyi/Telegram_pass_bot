@@ -1,5 +1,5 @@
-from telegram_pass_bot.pass_generator.pass_generator import get_password
 import string
+from telegram_pass_bot.pass_generator.pass_generator import get_password
 
 password = get_password
 

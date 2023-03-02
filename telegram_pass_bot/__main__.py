@@ -1,8 +1,8 @@
 import asyncio
 import logging
-from handlers import start, registration
+from telegram_pass_bot.handlers import start, registration
 from aiogram import Bot, Dispatcher
-from .token import TOKEN
+from telegram_pass_bot.bot_token import TOKEN
 
 
 async def main() -> None:

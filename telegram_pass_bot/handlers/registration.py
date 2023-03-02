@@ -3,8 +3,8 @@ from aiogram.filters import Command
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from .db_interactions import get_hash_pass, put_user_in_db
-from .db_interactions import con, cur
+from telegram_pass_bot.db_interactions import get_hash_pass, put_user_in_db
+from telegram_pass_bot.db_interactions import con, cur
 import zlib
 
 router = Router()

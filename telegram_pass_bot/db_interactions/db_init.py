@@ -8,12 +8,12 @@ PATH_TO_DB = "pass.db"
 def create_tables(con: Connection, cur: Cursor) -> None:
 
     # Creates table to keep telegram_ids and hashed passwords
-    cur.execute("CREATE TABLE [IF NOT EXISTS] users( "
+    cur.execute("CREATE TABLE IF NOT EXISTS users ( "
                 "telegram_id BIGINT NOT NULL UNIQUE, "
                 "password_hash BIGINT NOT NULL "
                 "); ")
     # Creates table to keep telegram_ids, services and passwords for them
-    cur.execute("CREATE TABLE [IF NOT EXISTS] passwords( "
+    cur.execute("CREATE TABLE IF NOT EXISTS passwords ( "
                 "telegram_id BIGINT NOT NULL, "
                 "service VARCHAR(80) NOT NULL, "
                 "password VARCHAR(80) NOT NULL "
