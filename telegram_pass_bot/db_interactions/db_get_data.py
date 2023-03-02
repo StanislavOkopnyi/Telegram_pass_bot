@@ -6,7 +6,10 @@ from typing import Any
 def get_hash_pass(cur: Cursor, telegram_id: int) -> int | None:
     user = cur.execute("SELECT telegram_id, password_hash FROM users "
                        f"WHERE telegram_id = {telegram_id}; ")
-    return tuple(user.fetchone())[1]
+    try:
+        return tuple(user.fetchone())[1]
+    except IndexError:
+        return None
 
 
 def get_all_passwords(cur: Cursor, telegram_id: int) -> list[Any]:
