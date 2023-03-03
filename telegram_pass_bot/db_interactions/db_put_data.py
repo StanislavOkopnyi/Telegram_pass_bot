@@ -1,4 +1,5 @@
 from sqlite3 import Connection, Cursor
+import zlib
 
 
 def put_user_in_db(con: Connection, cur: Cursor, telegram_id: int, password_hash: int) -> None:
@@ -15,3 +16,7 @@ def put_service_pass_in_db(con: Connection, cur: Cursor, telegram_id: int, servi
     cur.execute("INSERT INTO passwords(telegram_id, service, password) "
                 f"VALUES ({telegram_id}, '{service}', '{password}'); ")
     con.commit()
+
+
+def get_password_hash(password: str) -> int:
+    return zlib.crc32(bytes(password, encoding="utf8"))
