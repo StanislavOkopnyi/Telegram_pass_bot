@@ -8,7 +8,7 @@ router = Router()
 
 
 @router.message(Command("start"))
-async def start_handler(message: Message, state: FSMContext) -> None:
+async def handler_start(message: Message, state: FSMContext) -> None:
     await state.clear()
     await message.answer(f"Привет, {message.from_user.full_name}!",
                          reply_markup=ReplyKeyboardRemove())
@@ -18,6 +18,6 @@ async def start_handler(message: Message, state: FSMContext) -> None:
 
 
 @router.message(Command("stop"))
-async def stop_handler(message: Message, state: FSMContext):
+async def handler_stop(message: Message, state: FSMContext):
     await state.clear()
     await message.answer("Состояние бота сброшено")

@@ -15,7 +15,7 @@ class RegistrationState(StatesGroup):
 
 
 @router.message(Command("registration"))
-async def registration_handler(message: Message, state: FSMContext):
+async def handler_registration(message: Message, state: FSMContext):
 
     user_and_pass = get_hash_pass(cur, message.from_user.id)
 
@@ -28,7 +28,7 @@ async def registration_handler(message: Message, state: FSMContext):
 
 
 @router.message(RegistrationState.password)
-async def password_saving(message: Message, state: FSMContext):
+async def handler_password_saving(message: Message, state: FSMContext):
 
     hash_password = get_password_hash(message.text)
     put_user_in_db(con, cur, message.from_user.id, hash_password)

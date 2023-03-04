@@ -21,7 +21,7 @@ def password_check(password: str, hashed_password: str) -> bool:
 
 
 @router.message(Command("sign_in"))
-async def pass_await(message: Message, state: FSMContext):
+async def handler_pass_await(message: Message, state: FSMContext):
 
     user_id = message.from_user.id
     password = get_hash_pass(cur, user_id)
@@ -37,7 +37,7 @@ async def pass_await(message: Message, state: FSMContext):
 
 
 @router.message(SignIn.awaiting_password)
-async def bot_password_check(message: Message, state: FSMContext):
+async def handler_password_check(message: Message, state: FSMContext):
 
     user_id = message.from_user.id
     password = get_hash_pass(cur, user_id)
