@@ -22,11 +22,15 @@ def password_check(password: str, hashed_password: str) -> bool:
 
 @router.message(Command("sign_in"))
 async def pass_await(message: Message, state: FSMContext):
-    password = get_hash_pass(cur, message.from_user.id)
+
+    user_id = message.from_user.id
+    password = get_hash_pass(cur, user_id)
+
     if not password:
         await message.answer("Вы еще не зарегистрированы в боте. "
                              "Для регистрации введите комманду /registration.")
         return
+
     await message.answer("Введите пароль:")
     await state.set_state(SignIn.awaiting_password)
     await state.update_data(tries=1)
@@ -34,11 +38,14 @@ async def pass_await(message: Message, state: FSMContext):
 
 @router.message(SignIn.awaiting_password)
 async def bot_password_check(message: Message, state: FSMContext):
-    password = get_hash_pass(cur, message.from_user.id)
+
+    user_id = message.from_user.id
+    password = get_hash_pass(cur, user_id)
     data = await state.get_data()
     tries_num = data["tries"]
+    message_text = message.text
 
-    if password_check(message.text, password):
+    if password_check(message_text, password):
         await message.answer("Авторизация прошла успешно.")
         await state.set_state(SignIn.got_right_pass)
         return
