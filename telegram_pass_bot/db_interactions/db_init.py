@@ -35,7 +35,7 @@ def check_tables(cur: Cursor) -> bool:
 
 
 def init() -> tuple[Connection, Cursor]:
-
+    """Initialization of database with path=PATH_TO_DB"""
     with open(PATH_TO_DB, "a") as _:
         pass
 

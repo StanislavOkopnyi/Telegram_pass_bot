@@ -3,6 +3,7 @@ from typing import Any
 
 
 def get_hash_pass(cur: Cursor, telegram_id: int) -> int | None:
+    """Returns password's hash if it is in database, else returns None"""
     user = cur.execute("SELECT telegram_id, password_hash FROM users "
                        f"WHERE telegram_id = {telegram_id}; ")
     user = user.fetchone()
@@ -11,6 +12,7 @@ def get_hash_pass(cur: Cursor, telegram_id: int) -> int | None:
 
 
 def get_all_passwords(cur: Cursor, telegram_id: int) -> list[tuple]:
+    """Returns all passwords from database"""
     passwords = cur.execute("SELECT telegram_id, service, password "
                             "FROM passwords "
                             f"WHERE telegram_id = {telegram_id}; ")
@@ -21,6 +23,7 @@ def get_all_passwords(cur: Cursor, telegram_id: int) -> list[tuple]:
 
 
 def get_service_passwords(cur: Cursor, telegram_id: int, service: str) -> list[Any]:
+    """Returns all passwords for service from database"""
     passwords = cur.execute("SELECT telegram_id, service, password "
                             "FROM passwords "
                             f"WHERE telegram_id = {telegram_id} AND "
