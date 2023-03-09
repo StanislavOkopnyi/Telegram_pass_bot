@@ -51,10 +51,10 @@ async def handler_password_check(message: Message, state: FSMContext):
         await state.set_state(SignIn.got_right_pass)
         return
 
-    await message.answer("Неверный пароль")
+    await message.answer("Неверный пароль.")
 
     if tries_num >= 3:
-        await message.answer("Неудачная авторизация")
+        await message.answer("Неудачная авторизация.")
         await message.answer("Для повторной попытки введите "
                              "комманду /sign_in.")
         await state.clear()

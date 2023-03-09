@@ -23,7 +23,7 @@ async def handler_start(message: Message, state: FSMContext) -> None:
                          reply_markup=ReplyKeyboardRemove())
     await message.answer("Этот бот создан для хранения паролей. Для того, "
                          "чтобы зарегистрироваться введите команду "
-                         "/registration")
+                         "/registration.")
 
 
 @router.message(Command("stop"))
@@ -31,13 +31,13 @@ async def handler_stop(message: Message, state: FSMContext):
     state_to_check = await state.get_state()
     if state_to_check not in authorized_states:
         await state.clear()
-        await message.answer("Состояние бота сброшено")
+        await message.answer("Состояние бота сброшено.")
         return
     await state.set_state(SignIn.got_right_pass)
-    await message.answer("Состояние бота сброшено")
+    await message.answer("Состояние бота сброшено.")
 
 
 @router.message(Command("sign_out"))
 async def handler_log_out(message: Message, state: FSMContext):
     await state.clear()
-    await message.answer("Вы успешно вышли из аккаунта")
+    await message.answer("Вы успешно вышли из аккаунта.")

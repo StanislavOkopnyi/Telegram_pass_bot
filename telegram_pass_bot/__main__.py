@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from telegram_pass_bot.handlers import start, registration, sign_in
+from telegram_pass_bot.handlers import not_command_handlers, start, registration, sign_in
 from telegram_pass_bot.handlers import help_router
 from telegram_pass_bot.handlers.user_db_interactions import put_pass, get_pass
 from telegram_pass_bot.handlers.user_db_interactions import delete_pass
@@ -19,6 +19,7 @@ async def main() -> None:
     dp.include_router(get_pass.router)
     dp.include_router(delete_pass.router)
     dp.include_router(help_router.router)
+    dp.include_router(not_command_handlers.router)
 
     # Initialize Bot instance with a default parse mode which will be passed to all API calls
     bot = Bot(TOKEN, parse_mode="HTML")

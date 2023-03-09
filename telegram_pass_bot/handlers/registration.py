@@ -37,6 +37,6 @@ async def handler_password_saving(message: Message, state: FSMContext):
     password = message.text
     put_user_in_db(con, cur, message.from_user.id, password)
 
-    await message.answer("Пароль сохранен")
+    await message.answer("Пароль сохранен.")
     await message.answer("Для авторизации введите команду - /sign_in.")
     await state.clear()

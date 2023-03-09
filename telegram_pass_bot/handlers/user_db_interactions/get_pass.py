@@ -40,5 +40,5 @@ async def handler_service_pass_check_return(message: Message, state: FSMContext)
         )
         await state.set_state(SignIn.got_right_pass)
         return
-    await message.answer("Для этого сервиса нет пароля")
+    await message.answer("Для этого сервиса пароль не найден.")
     await state.set_state(SignIn.got_right_pass)
