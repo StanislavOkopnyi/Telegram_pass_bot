@@ -5,7 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from telegram_pass_bot.handlers.sign_in import SignIn
 from telegram_pass_bot.db_interactions import cur, con, put_service_pass_in_db
-
+from telegram_pass_bot.pass_generator.pass_generator import get_password
 
 router = Router()
 
@@ -37,7 +37,10 @@ async def handler_password(message: Message, state: FSMContext):
     service_name = data["service_name"]
     password = message.text
     user_id = message.from_user.id
+
+    if password == "/gen_pass":
+        password = get_password()
     put_service_pass_in_db(con, cur, user_id, service_name, password)
 
-    await message.answer("Пароль успешно сохранен.")
+    await message.answer(f"Пароль \"{password}\"  успешно сохранен.")
     await state.set_state(SignIn.got_right_pass)
