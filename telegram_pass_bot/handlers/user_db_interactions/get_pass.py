@@ -18,7 +18,8 @@ class GetOnePass(StatesGroup):
 async def handler_all_passwords(message: Message):
 
     password_list = get_all_passwords(cur, message.from_user.id)
-    password_list = list(map(lambda x: f"{x[0]} --> {x[1]}", password_list))
+    password_list = list(
+        map(lambda x: f"{x[0]}   --->   {x[1]}", password_list))
 
     await message.answer(("Список паролей:\n" + "\n".join(password_list)))
 
@@ -36,7 +37,7 @@ async def handler_service_pass_check_return(message: Message, state: FSMContext)
     service_passwords = get_service_passwords(cur, user_id, service)
     if service_passwords:
         await message.answer(
-            "\n".join([f"{x[1]} --> {x[2]}" for x in service_passwords])
+            "\n".join([f"{x[1]}   --->   {x[2]}" for x in service_passwords])
         )
         await state.set_state(SignIn.got_right_pass)
         return
