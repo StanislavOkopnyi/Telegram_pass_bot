@@ -23,10 +23,15 @@ async def handler_put_pass(message: Message, state: FSMContext):
 
 @router.message(PutPassInDb.awaiting_service_name)
 async def handler_service_name(message: Message, state: FSMContext):
-    await state.update_data(service_name=message.text)
+    service = message.text
+    if len(service) > 80:
+        await message.answer("Максимально допустимая дл"
+                             "ина названия сервиса - 80 символов.")
+        return
+    await state.update_data(service_name=service)
     await message.answer("Если вы хотите сгенирировать"
                          "пароль введите команду /gen_pass.")
-    await message.answer("Введите пароль для сервиса:")
+    await message.answer("В ином случае - введите пароль для сервиса:")
     await state.set_state(PutPassInDb.awaiting_password)
 
 

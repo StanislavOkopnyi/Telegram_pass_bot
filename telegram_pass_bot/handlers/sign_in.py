@@ -47,6 +47,13 @@ async def handler_password_check(message: Message, state: FSMContext):
 
     if password_check(message_text, password):
         await message.answer("Авторизация прошла успешно.")
+        await message.answer("Для того, чтобы поместить пароль в базу данных бота "
+                             "введите команду /put_pass.")
+        await message.answer("Для получения паролей для определенного сервиса "
+                             "введите команду /one_pass.")
+        await message.answer("Команда /all_pass выводит "
+                             "все сохраненные пароли.")
+        await message.answer("Для удаления паролей введите комманду /delete.")
         await state.set_state(SignIn.got_right_pass)
         return
 
@@ -54,6 +61,8 @@ async def handler_password_check(message: Message, state: FSMContext):
 
     if tries_num >= 3:
         await message.answer("Неудачная авторизация")
+        await message.answer("Для повторной попытки введите "
+                             "комманду /sign_in.")
         await state.clear()
         return
 
