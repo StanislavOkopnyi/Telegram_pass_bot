@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "telegram-pass-bot"
 version = "0.1.0"
-description = ""
+description = "telegram bot which keep passwords"
 authors = ["Pineapple_Juice <st.okopnyi@gmail.com>"]
 readme = "README.md"
 packages = [{include = "telegram_pass_bot"}]
