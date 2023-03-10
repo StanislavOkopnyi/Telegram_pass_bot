@@ -5,7 +5,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.filters import Command
 from telegram_pass_bot.db_interactions import get_hash_pass, get_password_hash
 from telegram_pass_bot.db_interactions import cur
-from telegram_pass_bot.handlers.templates.help_template import help_text
+from telegram_pass_bot.handlers.templates.help_template import HELP_TEXT
 
 router = Router()
 
@@ -47,7 +47,7 @@ async def handler_password_check(message: Message, state: FSMContext):
 
     if password_check(password_from_user, password_from_db):
         await message.answer("Авторизация прошла успешно.")
-        await message.answer(help_text)
+        await message.answer(HELP_TEXT)
         await state.set_state(SignIn.got_right_pass)
         return
 
