@@ -29,7 +29,7 @@ async def handler_service_name(message: Message, state: FSMContext):
                              "ина названия сервиса - 80 символов.")
         return
     await state.update_data(service_name=service)
-    await message.answer("Если вы хотите сгенирировать"
+    await message.answer("Если вы хотите сгенирировать "
                          "пароль введите команду /gen_pass.")
     await message.answer("В ином случае - введите пароль для сервиса:")
     await state.set_state(PutPassInDb.awaiting_password)

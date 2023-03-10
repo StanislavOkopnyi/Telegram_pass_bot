@@ -21,8 +21,8 @@ async def handler_start(message: Message, state: FSMContext) -> None:
     await state.clear()
     await message.answer(f"Привет, {message.from_user.full_name}!",
                          reply_markup=ReplyKeyboardRemove())
-    await message.answer("Этот бот создан для хранения паролей. Для того, "
-                         "чтобы зарегистрироваться введите команду "
+    await message.answer("Этот бот создан для хранения паролей. "
+                         "Чтобы зарегистрироваться введите команду "
                          "/registration.")
 
 
