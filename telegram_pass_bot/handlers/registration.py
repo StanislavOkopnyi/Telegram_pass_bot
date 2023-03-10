@@ -5,6 +5,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from telegram_pass_bot.db_interactions import get_hash_pass, put_user_in_db
 from telegram_pass_bot.db_interactions import con, cur
+from telegram_pass_bot.pass_generator.pass_generator import get_password
 
 router = Router()
 
@@ -35,8 +36,12 @@ async def handler_registration(message: Message, state: FSMContext):
 async def handler_password_saving(message: Message, state: FSMContext):
 
     password = message.text
+
+    if password == "/generate":
+        password = get_password()
+
     put_user_in_db(con, cur, message.from_user.id, password)
 
-    await message.answer("Пароль сохранен.")
+    await message.answer(f"Пароль '{password}' сохранен.")
     await message.answer("Для авторизации введите команду - /sign_in.")
     await state.clear()
