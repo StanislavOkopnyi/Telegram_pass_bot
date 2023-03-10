@@ -20,7 +20,9 @@ async def handler_all_passwords(message: Message):
     password_list = get_all_passwords(cur, message.from_user.id)
     password_list = list(
         map(lambda x: f"{x[0]}   --->   {x[1]}", password_list))
-
+    if not password_list:
+        await message.answer("Не найдено сохраненных паролей 😢.")
+        return
     await message.answer(("Список паролей:\n" + "\n".join(password_list)))
 
 
